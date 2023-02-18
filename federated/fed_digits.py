@@ -192,7 +192,7 @@ def communication(args, server_model, models, client_weights):
 
 if __name__ == '__main__':
 
-    print('Device:', device)
+
     parser = argparse.ArgumentParser()
     parser.add_argument('--log', action='store_true', help ='whether to make a log')
     parser.add_argument('--test', action='store_true', help ='test the pretrained model')
@@ -211,6 +211,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     device = torch.device('cuda:' + str(args.cuda_num) if torch.cuda.is_available() else 'cpu')
+    print('Device:', device)
     seed = 1
     np.random.seed(seed)
     torch.manual_seed(seed)
