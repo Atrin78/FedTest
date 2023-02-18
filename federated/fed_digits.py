@@ -259,7 +259,7 @@ if __name__ == '__main__':
     datasets = ['MNIST', 'SVHN', 'USPS', 'SynthDigits', 'MNIST-M']
     
     # federated setting
-    client_num = len(datasets)
+    client_num = len(datasets)-3
     client_weights = [1/client_num for i in range(client_num)]
     models = [copy.deepcopy(server_model).to(device) for idx in range(client_num)]
 
