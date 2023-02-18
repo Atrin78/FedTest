@@ -272,10 +272,14 @@ if __name__ == '__main__':
             for client_idx in range(client_num):
                 models[client_idx].load_state_dict(checkpoint['model_{}'.format(client_idx)])
             for test_idx, test_loader in enumerate(test_loaders):
+                if test_idx >= client_num:
+                    break
                 _, test_acc = test(models[test_idx], test_loader, loss_fun, device)
                 print(' {:<11s}| Test  Acc: {:.4f}'.format(datasets[test_idx], test_acc))
         else:
             for test_idx, test_loader in enumerate(test_loaders):
+                if test_idx >= client_num:
+                    break
                 _, test_acc = test(server_model, test_loader, loss_fun, device)
                 print(' {:<11s}| Test  Acc: {:.4f}'.format(datasets[test_idx], test_acc))
         exit(0)
@@ -324,6 +328,8 @@ if __name__ == '__main__':
 
         # start testing
         for test_idx, test_loader in enumerate(test_loaders):
+            if test_idx >= client_num:
+                break
             test_loss, test_acc = test(models[test_idx], test_loader, loss_fun, device)
             print(' {:<11s}| Test  Loss: {:.4f} | Test  Acc: {:.4f}'.format(datasets[test_idx], test_loss, test_acc))
             if args.log:
